@@ -19,14 +19,9 @@ import FooterFAB from './compenents/FooterFAB/FooterFAB';
 // const Home = React.lazy(() => import('./pages/Home/Home'));
 const QuestionList = React.lazy(() => import('./pages/QuestionList/QuestionList'));
 const Question = React.lazy(() => import('./pages/Question/Question'));
-const LeaderBoard = React.lazy(() => import('./pages/LeaderBoard/LeaderBoard'));
-const Codes = React.lazy(() => import('./pages/Codes/Codes'));
 const NotFound = React.lazy(() => import('./pages/NotFound/NotFound'));
-const DashBoard = React.lazy(() => import('./pages/DashBoard/DashBoard'));
+
 const Account = React.lazy(() => import('./pages/Account/Account'));
-const LinkShortner = React.lazy(() => import('./pages/LinkShortner/LinkShortner'));
-const Notes = React.lazy(() => import('./pages/Notes/Notes'));
-const ServerLogs = React.lazy(() => import('./pages/ServerLogs/ServerLogs'));
 const Customform = React.lazy(() => import('./compenents/Customform/Customform'));
 
 
@@ -71,18 +66,18 @@ const App = () => {
                     <Routes>
                         {/* <Route exact path='/' element={<Home />} /> */}
                         <Route exact path='/' element={<Navigate replace to='/questions' />} />
-                        <Route exact path='/questions' element={<QuestionList />} />
-                        <Route exact path='/questions/:id' element={<Question />} />
-                        <Route exact path='/leaderboard' element={<LeaderBoard />} />
-                        <Route exact path='/codes/:id' element={<Codes />} />
+                        <Route exact path='/questions' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <QuestionList />} />
+                        <Route exact path='/questions/:id' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <Question />} />
+                        <Route exact path='/account' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <Account />} />
+                        {/* <Route exact path='/leaderboard' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <LeaderBoard />} />
+                        <Route exact path='/codes/:id' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <Codes />} />
                         <Route exact path='/login' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <Navigate replace to='/questions' />} />
                         <Route exact path='/register' element={!loginState.loggedIn ? <Customform pageType={REGISTER} /> : <Navigate replace to='/questions' />} />
                         <Route exact path='/changePassword' element={<Customform pageType={CHANGEPASSWORD} />} />
                         <Route exact path='/dashboard' element={loginState.loggedIn ? <DashBoard /> : <Navigate replace to='/questions' />} />
-                        <Route exact path='/account' element={<Account />} />
-                        <Route exact path='/notes' element={<Notes />} />
+                        <Route exact path='/notes' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <Notes />} />
                         <Route exact path='/linkShortner' element={<LinkShortner />} />
-                        <Route exact path='/serverLogs' element={<ServerLogs />} />
+                        <Route exact path='/serverLogs' element={!loginState.loggedIn ? <Customform pageType={LOGIN} /> : <ServerLogs />} /> */}
                         <Route exact path='*' element={<NotFound />} />
                     </Routes>
                 </Suspense>
